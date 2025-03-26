@@ -293,15 +293,15 @@ func (p *Provider) RefreshTokenWithIDToken(refreshToken string) (*RefreshTokenRe
 	if err != nil {
 		return nil, err
 	}
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("Non-200 response from RefreshToken: %d, WWW-Authenticate=%s", resp.StatusCode, resp.Header.Get("WWW-Authenticate"))
-	}
-
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
 	resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("Non-200 response from RefreshToken: %d, WWW-Authenticate=%s, Content=%s", resp.StatusCode, resp.Header.Get("WWW-Authenticate"), string(body))
+	}
 
 	refreshTokenResponse := &RefreshTokenResponse{}
 
