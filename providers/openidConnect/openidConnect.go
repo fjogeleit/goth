@@ -404,15 +404,15 @@ func (p *Provider) fetchUserInfo(url, accessToken string) (map[string]interface{
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("Non-200 response from UserInfo: %d, WWW-Authenticate=%s", resp.StatusCode, resp.Header.Get("WWW-Authenticate"))
-	}
-
 	// The UserInfo Claims MUST be returned as the members of a JSON object
 	// http://openid.net/specs/openid-connect-core-1_0.html#UserInfoResponse
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("Non-200 response from UserInfo: %d, WWW-Authenticate=%s, Content=%s", resp.StatusCode, resp.Header.Get("WWW-Authenticate"), string(data))
 	}
 
 	return unMarshal(data)
