@@ -28,6 +28,7 @@ $ go get github.com/markbates/goth
 * Dailymotion
 * Deezer
 * DigitalOcean
+* DingTalk
 * Discord
 * Dropbox
 * Eve Online
@@ -37,7 +38,6 @@ $ go get github.com/markbates/goth
 * GitHub
 * Gitlab
 * Google
-* Google+ (deprecated)
 * Heroku
 * InfluxCloud
 * Instagram

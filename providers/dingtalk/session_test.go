@@ -1,16 +1,18 @@
-package gplus
+package dingtalk_test
 
 import (
 	"testing"
+	"time"
 
 	"github.com/markbates/goth"
+	"github.com/markbates/goth/providers/dingtalk"
 	"github.com/stretchr/testify/assert"
 )
 
 func Test_Implements_Session(t *testing.T) {
 	t.Parallel()
 	a := assert.New(t)
-	s := &Session{}
+	s := &dingtalk.Session{}
 
 	a.Implements((*goth.Session)(nil), s)
 }
@@ -18,7 +20,7 @@ func Test_Implements_Session(t *testing.T) {
 func Test_GetAuthURL(t *testing.T) {
 	t.Parallel()
 	a := assert.New(t)
-	s := &Session{}
+	s := &dingtalk.Session{}
 
 	_, err := s.GetAuthURL()
 	a.Error(err)
@@ -32,16 +34,24 @@ func Test_GetAuthURL(t *testing.T) {
 func Test_ToJSON(t *testing.T) {
 	t.Parallel()
 	a := assert.New(t)
-	s := &Session{}
+	s := &dingtalk.Session{}
 
 	data := s.Marshal()
-	a.Equal(data, `{"AuthURL":"","AccessToken":"","RefreshToken":"","ExpiresAt":"0001-01-01T00:00:00Z"}`)
+	a.Equal(data, `{"AuthURL":"","AccessToken":"","RefreshToken":"","ExpiresAt":"0001-01-01T00:00:00Z","CorpID":"","ExpectedCorpID":""}`)
 }
 
 func Test_String(t *testing.T) {
 	t.Parallel()
 	a := assert.New(t)
-	s := &Session{}
+	s := &dingtalk.Session{}
 
 	a.Equal(s.String(), s.Marshal())
+}
+
+func Test_GetExpiresAt(t *testing.T) {
+	t.Parallel()
+	a := assert.New(t)
+	s := &dingtalk.Session{}
+
+	a.Equal(s.ExpiresAt, time.Time{})
 }

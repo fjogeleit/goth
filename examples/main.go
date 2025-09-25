@@ -21,6 +21,7 @@ import (
 	"github.com/markbates/goth/providers/dailymotion"
 	"github.com/markbates/goth/providers/deezer"
 	"github.com/markbates/goth/providers/digitalocean"
+	"github.com/markbates/goth/providers/dingtalk"
 	"github.com/markbates/goth/providers/discord"
 	"github.com/markbates/goth/providers/dropbox"
 	"github.com/markbates/goth/providers/eveonline"
@@ -30,7 +31,6 @@ import (
 	"github.com/markbates/goth/providers/github"
 	"github.com/markbates/goth/providers/gitlab"
 	"github.com/markbates/goth/providers/google"
-	"github.com/markbates/goth/providers/gplus"
 	"github.com/markbates/goth/providers/heroku"
 	"github.com/markbates/goth/providers/instagram"
 	"github.com/markbates/goth/providers/intercom"
@@ -89,7 +89,6 @@ func main() {
 		facebook.New(os.Getenv("FACEBOOK_KEY"), os.Getenv("FACEBOOK_SECRET"), "http://localhost:3000/auth/facebook/callback"),
 		fitbit.New(os.Getenv("FITBIT_KEY"), os.Getenv("FITBIT_SECRET"), "http://localhost:3000/auth/fitbit/callback"),
 		google.New(os.Getenv("GOOGLE_KEY"), os.Getenv("GOOGLE_SECRET"), "http://localhost:3000/auth/google/callback"),
-		gplus.New(os.Getenv("GPLUS_KEY"), os.Getenv("GPLUS_SECRET"), "http://localhost:3000/auth/gplus/callback"),
 		github.New(os.Getenv("GITHUB_KEY"), os.Getenv("GITHUB_SECRET"), "http://localhost:3000/auth/github/callback"),
 		spotify.New(os.Getenv("SPOTIFY_KEY"), os.Getenv("SPOTIFY_SECRET"), "http://localhost:3000/auth/spotify/callback"),
 		linkedin.New(os.Getenv("LINKEDIN_KEY"), os.Getenv("LINKEDIN_SECRET"), "http://localhost:3000/auth/linkedin/callback"),
@@ -149,6 +148,8 @@ func main() {
 		wecom.New(os.Getenv("WECOM_CORP_ID"), os.Getenv("WECOM_SECRET"), os.Getenv("WECOM_AGENT_ID"), "http://localhost:3000/auth/wecom/callback"),
 		zoom.New(os.Getenv("ZOOM_KEY"), os.Getenv("ZOOM_SECRET"), "http://localhost:3000/auth/zoom/callback", "read:user"),
 		patreon.New(os.Getenv("PATREON_KEY"), os.Getenv("PATREON_SECRET"), "http://localhost:3000/auth/patreon/callback"),
+		// DingTalk provider
+		dingtalk.New(os.Getenv("DINGTALK_KEY"), os.Getenv("DINGTALK_SECRET"), "https://f7ca-103-148-203-253.ngrok-free.app/auth/dingtalk/callback", os.Getenv("DINGTALK_CORP_ID"), "openid", "corpid"),
 	)
 
 	// OpenID Connect is based on OpenID Connect Auto Discovery URL (https://openid.net/specs/openid-connect-discovery-1_0-17.html)
@@ -170,6 +171,7 @@ func main() {
 		"dailymotion":     "Dailymotion",
 		"deezer":          "Deezer",
 		"digitalocean":    "Digital Ocean",
+		"dingtalk":        "DingTalk",
 		"discord":         "Discord",
 		"dropbox":         "Dropbox",
 		"eveonline":       "Eve Online",
@@ -179,7 +181,6 @@ func main() {
 		"github":          "Github",
 		"gitlab":          "Gitlab",
 		"google":          "Google",
-		"gplus":           "Google Plus",
 		"heroku":          "Heroku",
 		"instagram":       "Instagram",
 		"intercom":        "Intercom",
